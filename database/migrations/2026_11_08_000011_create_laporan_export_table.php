@@ -1,0 +1,25 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('laporan_export', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('admin_id')->constrained('users');
+            $table->tinyInteger('periode_bulan');
+            $table->smallInteger('periode_tahun');
+            $table->string('name_file');
+            $table->timestamp('created_at')->useCurrent();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('laporan_export');
+    }
+};
